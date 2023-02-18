@@ -12,7 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/blogs")
 public class BlogController {
-
+    @Autowired
+    BlogService blogService;
     @PostMapping
     public ResponseEntity createBlog(@RequestParam Integer userId ,
                                      @RequestParam String title,
@@ -24,6 +25,7 @@ public class BlogController {
     @DeleteMapping("/{blogId}")
     public ResponseEntity<Void> deleteBlog(@PathVariable int blogId) {
         // Delete the blog using deleteById
+        blogService.deleteBlog(blogId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
